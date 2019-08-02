@@ -26,4 +26,39 @@ public class PebbleViewsRendererConfigurationProperties implements Toggleable {
 		this.enabled = enabled;
 	}
 
+	public String getSuffix() {
+		return suffix;
+	}
+	public void setSuffix(String suffix) {
+		this.suffix = suffix;
+	}
+
+	public String getEncoding() {
+		return encoding;
+	}
+	public void setEncoding(String encoding) {
+		this.encoding = encoding;
+	}
+
+	public boolean isCacheable() {
+		return cacheable;
+	}
+	public void setCacheable(boolean cacheable) {
+		this.cacheable = cacheable;
+	}
+
+	public String getLocale() {
+		return locale;
+	}
+	public void setLocale(String locale) {
+		this.locale = locale;
+	}
+
+	public boolean isStrictVariables() {
+		return strictVariables;
+	}
+	public void setStrictVariables(boolean strictVariables) {
+		this.strictVariables = strictVariables;
+	}
+
 }

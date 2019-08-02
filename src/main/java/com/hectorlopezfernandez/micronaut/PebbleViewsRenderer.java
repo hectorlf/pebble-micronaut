@@ -3,9 +3,11 @@ package com.hectorlopezfernandez.micronaut;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.mitchellbosecke.pebble.PebbleEngine;
 import com.mitchellbosecke.pebble.error.LoaderException;
-import com.mitchellbosecke.pebble.loader.ClasspathLoader;
 import com.mitchellbosecke.pebble.loader.Loader;
 
 import io.micronaut.core.io.Writable;
@@ -17,33 +19,33 @@ import io.micronaut.views.ViewsRenderer;
 @Produces(MediaType.TEXT_HTML)
 public class PebbleViewsRenderer implements ViewsRenderer {
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(PebbleViewsRenderer.class);
+
+	private final Loader<String> loader;
 	private final PebbleEngine engine;
-	private final Loader loader;
 
 	@Inject
-	public PebbleViewsRenderer() {
-		this.loader = new ClasspathLoader();
-		loader.setPrefix("views");
-		loader.setSuffix(".pebble");
-		PebbleEngine.Builder engineBuilder = new PebbleEngine.Builder();
-		engineBuilder.loader(loader);
-		this.engine = engineBuilder.build();
+	public PebbleViewsRenderer(Loader<String> loader, PebbleEngine engine) {
+		this.loader = loader;
+		this.engine = engine;
 	}
 
 	@Override
 	public Writable render(String viewName, Object data) {
-		System.out.println("Rendering: " + viewName);
+		LOGGER.debug("Rendering template with name: {}", viewName);
 		return new PebbleTemplateWriter(engine.getTemplate(viewName), data);
 	}
 
 	@Override
 	public boolean exists(String viewName) {
-		try {
-			loader.getReader(viewName);
-			return true;
-		} catch(LoaderException le) {
-			return false;
+		boolean templateExists = true;
+		if (loader instanceof PebbleMicronautLoader) {
+			templateExists = ((PebbleMicronautLoader)loader).exists(viewName);
+		} else {
+			try { loader.getReader(viewName); }
+			catch(LoaderException le) { templateExists = false; }
 		}
+		return templateExists;
 	}
 
 }
