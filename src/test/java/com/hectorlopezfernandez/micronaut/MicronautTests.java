@@ -8,6 +8,7 @@ import java.util.Map;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -29,6 +30,7 @@ public class MicronautTests {
 	}
 
 	@Test
+	@Ignore
 	public void testSimpleJodaFilter() throws Exception {
 		PebbleTemplate compiledTemplate = engine.getTemplate("simple-filter.pebble");
 		Map<String, Object> context = new HashMap<>();
