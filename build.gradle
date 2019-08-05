@@ -47,7 +47,7 @@ uploadArchives {
 }
 
 project.group = 'com.hectorlopezfernandez.pebble'
-project.archivesBaseName = 'micronaut'
+project.archivesBaseName = 'pebble-micronaut'
 project.version = '1.0.0-SNAPSHOT'
 
 

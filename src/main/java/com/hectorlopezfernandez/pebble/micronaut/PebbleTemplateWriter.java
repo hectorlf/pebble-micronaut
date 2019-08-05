@@ -1,4 +1,4 @@
-package com.hectorlopezfernandez.micronaut;
+package com.hectorlopezfernandez.pebble.micronaut;
 
 import java.io.IOException;
 import java.io.Writer;

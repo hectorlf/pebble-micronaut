@@ -1,4 +1,4 @@
-package com.hectorlopezfernandez.micronaut;
+package com.hectorlopezfernandez.pebble.micronaut;
 
 import io.micronaut.context.annotation.ConfigurationProperties;
 import io.micronaut.core.util.Toggleable;

@@ -1,4 +1,4 @@
-package com.hectorlopezfernandez.micronaut;
+package com.hectorlopezfernandez.pebble.micronaut;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
