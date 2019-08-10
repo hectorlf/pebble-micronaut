@@ -48,7 +48,7 @@ uploadArchives {
 
 project.group = 'com.hectorlopezfernandez.pebble'
 project.archivesBaseName = 'pebble-micronaut'
-project.version = '1.0.0-SNAPSHOT'
+project.version = '1.0.1-SNAPSHOT'
 
 
 dependencies {
@@ -79,6 +79,6 @@ artifacts {
 }
 
 signing {
-   required { gradle.taskGraph.hasTask("uploadArchives") }
+   required { !version.endsWith("SNAPSHOT") && gradle.taskGraph.hasTask("uploadArchives") }
    sign configurations.archives
 }
