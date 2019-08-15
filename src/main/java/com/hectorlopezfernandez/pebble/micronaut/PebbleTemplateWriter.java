@@ -27,6 +27,7 @@ public class PebbleTemplateWriter implements Writable {
 		template.evaluate(out, data);
 	}
 
+	@SuppressWarnings("unchecked")
 	private static Map<String, Object> toMap(@Nullable Object data) {
 		if (data == null) {
 			return new HashMap<>();

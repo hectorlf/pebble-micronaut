@@ -23,11 +23,13 @@ public class PebbleViewsRenderer implements ViewsRenderer {
 
 	private final Loader<String> loader;
 	private final PebbleEngine engine;
+	private final PebbleViewsRendererConfigurationProperties pebbleConfig;
 
 	@Inject
-	public PebbleViewsRenderer(Loader<String> loader, PebbleEngine engine) {
+	public PebbleViewsRenderer(Loader<String> loader, PebbleEngine engine, PebbleViewsRendererConfigurationProperties pebbleConfig) {
 		this.loader = loader;
 		this.engine = engine;
+		this.pebbleConfig = pebbleConfig;
 	}
 
 	@Override
@@ -38,14 +40,16 @@ public class PebbleViewsRenderer implements ViewsRenderer {
 
 	@Override
 	public boolean exists(String viewName) {
-		boolean templateExists = true;
-		if (loader instanceof PebbleMicronautLoader) {
-			templateExists = ((PebbleMicronautLoader)loader).exists(viewName);
-		} else {
-			try { loader.getReader(viewName); }
-			catch(LoaderException le) { templateExists = false; }
+		if (pebbleConfig.isAssumeTemplatesAlwaysExist()) return true;
+		
+		if (loader instanceof PebbleMicronautLoader) return ((PebbleMicronautLoader)loader).exists(viewName);
+		
+		try {
+			loader.getReader(viewName);
+			return true;
+		} catch(LoaderException le) {
+			return false;
 		}
-		return templateExists;
 	}
 
 }

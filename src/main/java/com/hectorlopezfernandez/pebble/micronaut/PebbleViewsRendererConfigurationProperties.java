@@ -17,6 +17,7 @@ public class PebbleViewsRendererConfigurationProperties implements Toggleable {
 	private boolean cacheable = true;
 	private String locale;
 	private boolean strictVariables = false;
+	private boolean assumeTemplatesAlwaysExist = true;
 
 	@Override
 	public boolean isEnabled() {
@@ -59,6 +60,13 @@ public class PebbleViewsRendererConfigurationProperties implements Toggleable {
 	}
 	public void setStrictVariables(boolean strictVariables) {
 		this.strictVariables = strictVariables;
+	}
+
+	public boolean isAssumeTemplatesAlwaysExist() {
+		return assumeTemplatesAlwaysExist;
+	}
+	public void setAssumeTemplatesAlwaysExist(boolean assumeTemplatesAlwaysExist) {
+		this.assumeTemplatesAlwaysExist = assumeTemplatesAlwaysExist;
 	}
 
 }
